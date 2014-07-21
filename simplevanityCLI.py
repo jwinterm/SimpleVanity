@@ -57,8 +57,10 @@ def createWallet():
         if len(electrum) > 2:
             break
 
-    p.kill()
-
+    if sys.platform == 'win32':
+        os.system("taskkill /im simplewallet.exe /f")
+    else:
+        p.kill()
     # print "Generated address: {0}".format(address)
     if not args.match_anywhere:
         print "Target: {0}, Address first chars: {1}".format(args.target, address[2:len(args.target)+2])
